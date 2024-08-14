@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/product/product.service';
+
+
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { ProductService } from '../../../services/product/product.service';
 
 @Component({
-  selector: 'app-landing',
+  selector: 'app-webproduct',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, CommonModule],
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css'
+  imports: [CommonModule, RouterLink],
+  templateUrl: './webproduct.component.html',
+  styleUrl: './webproduct.component.css'
 })
-export class LandingComponent implements OnInit {
+export class WebproductComponent implements OnInit {
 
   productList: any = [] = [];
   categoryList: any = [] = [];
@@ -41,4 +43,6 @@ export class LandingComponent implements OnInit {
     this.router.navigate(['/products', id]);
   }
 
+
 }
+

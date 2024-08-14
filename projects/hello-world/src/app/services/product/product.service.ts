@@ -20,6 +20,16 @@ export class ProductService {
     );
   }
 
+  getByCategoryId(id: number) {
+    return this.http.get(Constant.API_URL + Constant.METHODS.GET_ALL_PRODUCT_BY_CATEGORY_ID + id)
+    .pipe(
+      catchError((error) => {
+        console.error('Error in getCategory', error);
+        return throwError(error);
+      })
+    );
+  }
+
   getProducts() {
     return this.http.get(Constant.API_URL + Constant.METHODS.GET_ALL_PRODUCT)
     .pipe(
