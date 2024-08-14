@@ -18,7 +18,6 @@ export class CategoryProductsComponent {
   products: any [] = [];
   constructor(private activatedRoute: ActivatedRoute, private producServ: ProductService) {
     this.activatedRoute.params.subscribe((res: any) => {
-      // debugger;
       this.activeCategoryId = res.id;
       // We need to initiate the function once we have received the category id hence we call the function here
       this.loadProducts();

@@ -27,20 +27,39 @@ export class WebproductComponent implements OnInit {
 
   getAllProducts() {
     this.productSrv.getProducts().subscribe((res: any) => {
-      // debugger
       this.productList = res.data;
     });
   }
 
   getAllCategory() {
     this.productSrv.getCategory().subscribe((res: any) => {
-      // debugger
       this.categoryList = res.data;
     });
   }
 
   navigateToProducts(id: number) {
     this.router.navigate(['/products', id]);
+  }
+
+  addToCart(productId: number) {
+    const addToCartObj = {
+      "CartId": 0,
+      "CustId": 379,
+      "ProductId": productId,
+      "Quantity": 1,
+      "AddedDate": new Date()
+    }
+    console.log(addToCartObj);
+    this.productSrv.addToCart(addToCartObj).subscribe((res: any) => {
+      if(res.status == 200) {
+        alert('Product added to cart successfully');
+        debugger;
+        this.productSrv.cartUpdated$?.next(true);         // makes the cart updated
+        console.log(this.productSrv.cartUpdated$);
+      } else {
+        alert(res.message);
+      }
+    })
   }
 
 

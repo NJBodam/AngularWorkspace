@@ -47,7 +47,6 @@ export class ProductsComponent implements OnInit {
 
   onUpdate() {
     this.productSrv.saveProduct(this.productObj).subscribe((res: any) => {
-      debugger;
       if(res.status == 200) {
         alert('Product updated successfully');
         this.getProducts();
@@ -73,7 +72,6 @@ export class ProductsComponent implements OnInit {
 
   onSave() {
     this.productSrv.saveProduct(this.productObj).subscribe((res: any) => {
-      debugger;
       if(res.status == 200) {
         alert('Product saved successfully');
         this.getProducts();

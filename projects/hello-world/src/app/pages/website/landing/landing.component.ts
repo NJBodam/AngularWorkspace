@@ -14,26 +14,44 @@ export class LandingComponent implements OnInit {
 
   productList: any = [] = [];
   categoryList: any = [] = [];
+  cartList: any = [] = [];
+
 
   constructor(private productSrv: ProductService, private router: Router) {
+    // updating cart live
+    this.productSrv.cartUpdated$?.subscribe((res: any) => {
+      this.getCartByCustomer(); // whenever add to cart is clicked, this will be called
+    });
   }
+
 
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategory();
+    this.getCartByCustomer();
   }
 
   getAllProducts() {
     this.productSrv.getProducts().subscribe((res: any) => {
-      // debugger
       this.productList = res.data;
+    });
+  }
+
+  getCartByCustomer() {
+    this.productSrv.getCartByCusId(379).subscribe((res: any) => {
+      this.cartList = res.data;
     });
   }
 
   getAllCategory() {
     this.productSrv.getCategory().subscribe((res: any) => {
-      // debugger
       this.categoryList = res.data;
+    });
+  }
+
+  remove(id: number) {
+    this.productSrv.removeProductById(id).subscribe((res: any) => {
+      this.getCartByCustomer();
     });
   }
 
